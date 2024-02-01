@@ -1,0 +1,22 @@
+export const colorTheme = [
+     {
+        id:1,
+        hex_code:"#fc466b"
+     },
+     {
+        id:2,
+        hex_code:"#fdbb2d"
+     },
+     {
+        id:3,
+        hex_code:"red"
+     },
+     {
+        id:4,
+        hex_code:"#94b5e9"
+     },
+     {
+        id:5,
+        hex_code:"green"
+     }
+]
