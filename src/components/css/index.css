@@ -128,3 +128,40 @@
 .board_items_list:hover {
     background-color: #333533;
 }
+
+.side_menu_section{
+    background-color: var(--sec-bg-primary);
+    padding:.6rem 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 2px 1px 1px #202020;
+}
+.side_menu_section .search_content {
+    background-color: #242423;
+    width: 60%;
+    border-radius: 1rem;
+    padding: 0 .8rem;
+}
+.side_menu_section .search_content img {
+    display: block;
+    background-color: #242423;
+    border-radius: .5rem;
+}
+.search_content input {
+    background-color: #242423;
+    border-radius: 1rem;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+.search_content input:hover, .search_content input:focus{
+    border: none;
+    outline: none;
+}
+.theme{
+    padding: 0.5rem 1rem;
+    border-radius: .5rem;
+    transition: all 0.5s ease;
+}
+.theme:hover{
+    background-color: #242423;
+}
