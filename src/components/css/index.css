@@ -2,8 +2,6 @@
     height: 100vh;
     background-color: var(--sec-bg-primary);
     overflow-y: scroll;
-    position: fixed;
-    left: 0;
 }
 .logo {
     font-size:1.6rem;

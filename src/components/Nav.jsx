@@ -2,16 +2,17 @@ import React from "react";
 import door from "../assets/door.svg";
 import profile from "../assets/profile.png";
 import noti from "../assets/bell.svg";
+import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <div className="nav_menu w-full">
-      <div className="main_logo mb-4">
+      <Link to = "/" className="main_logo mb-4">
         <div className="logo">
            <h2>Task<span>Mate</span></h2>
         </div>
         <p>Focus.Active.Execute</p>
-      </div>
-      <div className="nav_menu_navigation flex justify-between items-center flex-1">
+      </Link>
+      <div className="nav_menu_navigation mt-5 flex justify-between items-center flex-1">
         <div className="profile flex items-center justify-center gap-1">
           <div className="card">
             <img

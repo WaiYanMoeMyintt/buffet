@@ -101,7 +101,7 @@ const Board = () => {
         <div className="board_items  gap-4 ">
           {sidebarLinks.map((items) => (
             <div className="cursor-pointer board_items_content" key={items}>
-              <div className="w-full flex items-center board_items_list  gap-2">
+              <Link to = {`/${items.name}`} className="w-full flex items-center board_items_list  gap-2">
                 <img
                   className="rounded mb-4"
                   src={items.src}
@@ -110,7 +110,7 @@ const Board = () => {
                   alt={items.name}
                 />
                 <p className="text-center text-white">{items.name}</p>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

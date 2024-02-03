@@ -4,11 +4,11 @@ import "./components/css/index.css";
 import { SideContent, Sidebar, Board, Project } from "./components";
 import moon from "./assets/half-moon.svg";
 import sun from "./assets/sun-light.svg";
-const App = () => {
+const App = ({children}) => {
   return (
     <main className="relative ">
-      <div className="main_container   flex justify-between flex-1">
-        <div className="sidebar h-96 lg:w-3/12 w-3/4 ">
+      <div className="main_container flex justify-between ">
+        <div className="sidebar h-96 lg:w-4/12 w-screen ">
           <Sidebar />
           <Board />
           <Project />
@@ -42,6 +42,7 @@ const App = () => {
           <SideContent />
         </div>
       </div>
+      <div>{children}</div>
     </main>
   );
 };
