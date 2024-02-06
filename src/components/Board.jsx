@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Board = () => {
   const boardSlices = useSelector((state) => state.board.value);
-  console.log(boardSlices);
   const [openModal, setOpenModal] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [boardSrc, setBoardSrc] = useState("");

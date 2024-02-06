@@ -213,8 +213,13 @@ form .task_btn img {
     background-color: #333533;
     border-radius: .5rem;
     box-shadow: 0px 2px 1px 1px #1e1f1e;
-    padding: .6rem .5rem;
+    padding: .6rem 1rem;
     gap:1rem;
+}
+.main_task_content:hover {
+    transition: all 0.6. ease-in;
+    box-shadow: 0px 2px 1px 1px #181818;
+
 }
 .main_task_content .task_check input {
     border-radius:2rem;
@@ -222,8 +227,20 @@ form .task_btn img {
 
 .main_task_content .task_title h3 {
     color: #fff;
-    letter-spacing: 0.1em;
 }
 .task_title p {
     color: #ccc;
+}
+.toast {
+    background-color: #333533;
+    border-radius: .5rem;
+    box-shadow: 0px 2px 1px 1px #1e1f1e;
+    position: fixed;
+    right: 0;
+    bottom: 0rem;
+}
+.update_title_input input{
+    background-color: transparent;
+    border-radius: .5rem;
+    width: 100%;
 }
