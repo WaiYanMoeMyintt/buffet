@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import list from "../assets/list.svg";
 import door from "../assets/door.svg";
 import create_btn from "../assets/plus.svg";
+import trash from "../assets/trash.svg";
 import { Button, Tooltip, Alert, Toast, Modal } from "flowbite-react";
 import cancel from "../assets/cancel.svg";
 import send from "../assets/send.svg";
-import trash from "../assets/trash.svg";
 import { create, deleteTask } from "../features/Task";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ const MainList = () => {
   const tasks = useSelector((state) => state.mainTask.value);
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
+  const [complete, setComplete] = useState(0);
   const createTask = (event) => {
     event.preventDefault();
     if (title && description) {
@@ -43,6 +44,9 @@ const MainList = () => {
   };
   const deleteTaskList = (taskId) => {
     dispatch(deleteTask({ id: taskId }));
+    if (taskId) {
+      return setComplete((items) => items + 1);
+    }
   };
   return (
     <div className="list_content mt-6 py-0 px-4">
@@ -56,6 +60,14 @@ const MainList = () => {
           </div>
         </div>
       </div>
+      {tasks.length === 0 && tasks.length < complete ? (
+        <Alert color="success" onDismiss={() => alert("Alert dismissed!")}>
+          <span className="font-medium"></span>
+           🎉Congraulations. Your are done.
+        </Alert>
+      ) : (
+        <div></div>
+      )}
       <div className="list_content_date mt-4">
         <h3 className="text-white text-2xl mb-4">Today</h3>
         <div className="schedule_list flex gap-8">
@@ -72,7 +84,7 @@ const MainList = () => {
             </div>
             <div className="completeTask">
               <p>
-                Complete <span> 0</span>
+                Complete <span> {complete}</span>
               </p>
             </div>
           </div>
@@ -117,7 +129,7 @@ const MainList = () => {
           </Tooltip>
         </div>
       </form>
-      <div className="main_task_container mt-4 ">
+      <div className="main_task_container mt-4 relative">
         {tasks.map((items, index) =>
           tasks.length === 0 ? (
             <div></div>
@@ -125,12 +137,28 @@ const MainList = () => {
             <Link
               to={`/${items.id}`}
               key={index}
-              className="main_task_content flex"
-              onClick={() => setOpenModal(true)}
+              className="main_task_content flex items-center"
             >
-              <div className="task_title">
-                <h3>{items.name}</h3>
-                <p>{items.description}</p>
+              <div className="task_title flex gap-4 relative w-full items-center justify-between">
+                <div
+                  onClick={() => setOpenModal(true)}
+                  className="flex flex-col"
+                >
+                  <h3>{items.name}</h3>
+                  <p>{items.description}</p>
+                </div>
+                <div
+                  onClick={() => deleteTaskList(items.id)}
+                  className="delete_icon"
+                >
+                  <img
+                    className="cursor-pointer"
+                    src={trash}
+                    alt="trash"
+                    width={20}
+                    height={20}
+                  />
+                </div>
               </div>
             </Link>
           )
@@ -159,7 +187,7 @@ const MainList = () => {
       ) : (
         <div></div>
       )}
-      <Modal className="" show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header className="modal_header">
           <span className="text-white">Edit Task</span>
         </Modal.Header>
@@ -183,7 +211,7 @@ const MainList = () => {
                 </div>
                 <div className="update_task_description">
                   <label className="mb-4 text-white">
-                    Update Task Description{" "}
+                    Update Task Description
                     <span className="text-rose-600">*</span>
                   </label>
                   <input

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 export const createTask = createSlice({
       name : "Task",
       initialState:{
@@ -7,7 +6,7 @@ export const createTask = createSlice({
             id: Date.now(),
             name:"Create a Plan",
             description:"for social media marketing",
-            complete:false
+            complete:false,
         }]
       },
       reducers:{
@@ -15,10 +14,8 @@ export const createTask = createSlice({
               state.value.unshift(action.payload);
           },
           deleteTask:(state,action)=>{
-              state.value =  state.value.filter((items)=>{
-                    items.id !== action.payload.type.id;
-               })
-          }
+              state.value =  state.value.filter(item=> item.id !== action.payload.id);
+          },
       }
 
 });
