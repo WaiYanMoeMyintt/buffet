@@ -5,22 +5,17 @@ import meeting from "../assets/meeting.avif";
 export const sidebarLinks = [
      {
         id:1,
-        name:"Overview",
+        name:"Today",
         src:overview
      },
      {
         id:2,
-        name:"Today",
+        name:"Manifest",
         src:today
      },
      {
         id:3,
         name:"Travel",
         src:plan
-     },
-     {
-        id:4,
-        name:"Meeting",
-        src:meeting
      },
 ]

@@ -1,5 +1,5 @@
 .sidebar{
-    height: 100vh;
+    height: 150vh;
     background-color: var(--sec-bg-primary);
     overflow-y: scroll;
 }
@@ -135,9 +135,14 @@
     border-radius: .5rem;
     box-shadow: 0 2px 1px 1px #202020;
 }
+.side_menu_section .greeting_content p {
+    color: #fff;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+}
 .side_menu_section .search_content {
     background-color: #242423;
-    width: 60%;
+    width: 70%;
     border-radius: 1rem;
     padding: 0 .8rem;
 }
@@ -150,18 +155,75 @@
     background-color: #242423;
     border-radius: 1rem;
     width: 100%;
-    border: none;
+    border: 1px solid #242423;
     outline: none;
 }
-.search_content input:hover, .search_content input:focus{
-    border: none;
+.search_content input:hover, .search_content input:focus, .search_content input:active{
+    border-color: #333332;
     outline: none;
 }
-.theme{
-    padding: 0.5rem 1rem;
+.list_content_date {
+    margin-top: 2rem;
+}
+.create_btn{
+    margin-top: 3rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+}
+.create_btn img {
+    background-color: var(--sec-bg-primary);
     border-radius: .5rem;
-    transition: all 0.5s ease;
+    box-shadow: 0px 2px 2px 2px #1e1f1e;
 }
-.theme:hover{
-    background-color: #242423;
+
+form {
+    margin-top: 3rem;
+    background-color: #333533;
+    width: 30%;
+    border-radius: .5rem;
+    outline: 1px solid #bdbcbc;
+    padding: .5rem 1rem;
+
+}
+form .task_name input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-radius: .5rem;
+
+}
+form .task_name input:focus,form .task_name input:active{
+    outline: none;
+    border: 1px solid #ccc;
+}
+form .task_btn img {
+    background-color: var(--sec-bg-primary);
+    border-radius: .5rem;
+}
+.main_task_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+.main_task_content{
+    background-color: #333533;
+    border-radius: .5rem;
+    box-shadow: 0px 2px 1px 1px #1e1f1e;
+    padding: .6rem .5rem;
+    gap:1rem;
+}
+.main_task_content .task_check input {
+    border-radius:2rem;
+}
+
+.main_task_content .task_title h3 {
+    color: #fff;
+    letter-spacing: 0.1em;
+}
+.task_title p {
+    color: #ccc;
 }

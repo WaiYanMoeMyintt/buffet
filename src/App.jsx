@@ -12,31 +12,6 @@ const App = ({children}) => {
           <Sidebar />
           <Board />
           <Project />
-
-          <div className="theme_container  py-4 px-4">
-            <div className="theme_content">
-              <div className="light cursor-pointer flex items-center justify-between  gap-2">
-                <img
-                  src={sun}
-                  alt="sun"
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                />
-                <p className = "text-center text-white">Light</p>
-              </div>
-              <div className="dark flex cursor-pointer items-center justify-between  gap-2">
-                <img
-                  src={moon}
-                  alt="moon"
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                />
-                <p className = "text-center text-white">Dark</p>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="sidebar_context   w-full">
           <SideContent />

@@ -6,6 +6,7 @@ import Meeting from "../pages/Meeting.jsx";
 import Overview from "../pages/Overview.jsx";
 import SideMenu from './SideMenu.jsx';
 import { Route, Routes } from 'react-router-dom';
+import MainList from './MainList.jsx';
 
 const SideContent = () => {
 
@@ -28,6 +29,7 @@ const SideContent = () => {
     <div className="sidecontent_container">
           <div className="sidecontent_content py-4 px-4">
                <SideMenu message = {message}/>
+               <MainList />
           </div>
           <Routes>
               <Route path = {"/Overview"} element = {<Overview />} />
