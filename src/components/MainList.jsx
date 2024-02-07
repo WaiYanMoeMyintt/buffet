@@ -3,12 +3,13 @@ import list from "../assets/list.svg";
 import door from "../assets/door.svg";
 import create_btn from "../assets/plus.svg";
 import trash from "../assets/trash.svg";
-import { Button, Tooltip, Alert, Toast, Modal } from "flowbite-react";
+import { Button, Tooltip, Toast, Modal } from "flowbite-react";
 import cancel from "../assets/cancel.svg";
 import send from "../assets/send.svg";
-import { create, deleteTask } from "../features/Task";
+import { create, deleteTask, updateTask } from "../features/Task";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 const MainList = () => {
   const date = new Date().getDate();
   const day = new Date().toString();
@@ -22,6 +23,9 @@ const MainList = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [complete, setComplete] = useState(0);
+  const [close, setClose] = useState(false);
+  const [currentTaskId, setCurrentTaskId] = useState(null);
+
   const createTask = (event) => {
     event.preventDefault();
     if (title && description) {
@@ -33,8 +37,6 @@ const MainList = () => {
           complete: false,
         })
       );
-      setTitle("");
-      setDescription("");
     } else {
       setToast(true);
       setTimeout(() => {
@@ -42,12 +44,31 @@ const MainList = () => {
       }, 2500);
     }
   };
+
+  const updateTaskList = (event) => {
+    event.preventDefault();
+    if (title && description && currentTaskId) {
+      dispatch(
+        updateTask({
+          id: currentTaskId,
+          name: title,
+          description: description,
+          complete: false,
+        })
+      );
+      setOpenModal(false);
+    } else {
+      return null;
+    }
+  };
+
   const deleteTaskList = (taskId) => {
     dispatch(deleteTask({ id: taskId }));
     if (taskId) {
       return setComplete((items) => items + 1);
     }
   };
+
   return (
     <div className="list_content mt-6 py-0 px-4">
       <div className="list_content_header mb-6">
@@ -61,10 +82,24 @@ const MainList = () => {
         </div>
       </div>
       {tasks.length === 0 && tasks.length < complete ? (
-        <Alert color="success" onDismiss={() => alert("Alert dismissed!")}>
-          <span className="font-medium"></span>
-           🎉Congraulations. Your are done.
-        </Alert>
+        <div
+          className={
+            close
+              ? "hidden"
+              : "success text-center flex justify-between items-center px-5 text-white py-4 rounded-lg"
+          }
+        >
+          <span className="font-medium  text-center">
+            {" "}
+            🎉Congraulations. Your are alrady done. 🎉
+          </span>
+          <img
+            onClick={() => setClose((prev) => !prev)}
+            alt="cancel"
+            className="cursor-pointer cancel_btn"
+            src={cancel}
+          />
+        </div>
       ) : (
         <div></div>
       )}
@@ -130,46 +165,44 @@ const MainList = () => {
         </div>
       </form>
       <div className="main_task_container mt-4 relative">
-        {tasks.map((items, index) =>
-          tasks.length === 0 ? (
-            <div></div>
-          ) : (
+        {tasks.map((items, index) => (
+          <div key={index} className="main_task_content flex items-center">
             <Link
               to={`/${items.id}`}
-              key={index}
-              className="main_task_content flex items-center"
+              className="task_title flex gap-4 relative w-full items-center justify-between"
+              onClick={() => {
+                setTitle(items.name);
+                setDescription(items.description);
+                setCurrentTaskId(items.id);
+                setOpenModal(true);
+              }}
             >
-              <div className="task_title flex gap-4 relative w-full items-center justify-between">
-                <div
-                  onClick={() => setOpenModal(true)}
-                  className="flex flex-col"
-                >
-                  <h3>{items.name}</h3>
-                  <p>{items.description}</p>
-                </div>
-                <div
-                  onClick={() => deleteTaskList(items.id)}
-                  className="delete_icon"
-                >
-                  <img
-                    className="cursor-pointer"
-                    src={trash}
-                    alt="trash"
-                    width={20}
-                    height={20}
-                  />
-                </div>
+              <div className="flex flex-col">
+                <h3>{items.name}</h3>
+                <p>{items.description}</p>
+              </div>
+              <div className="delete_icon" onClick={(e) => {
+                e.preventDefault();
+                deleteTaskList(items.id);
+              }}>
+                <img
+                  className="cursor-pointer"
+                  src={trash}
+                  alt="trash"
+                  width={20}
+                  height={20}
+                />
               </div>
             </Link>
-          )
-        )}
+          </div>
+        ))}
       </div>
       <div onClick={() => setShow(true)} className="create_btn cursor-pointer">
         <Tooltip content="Create">
           <img src={create_btn} alt="create" width={40} height={40} />
         </Tooltip>
       </div>
-      {toast ? (
+      {toast && (
         <Toast className="toast">
           <div className="text-sm font-normal text-white">
             Task input are required.
@@ -184,8 +217,6 @@ const MainList = () => {
             <Toast.Toggle />
           </div>
         </Toast>
-      ) : (
-        <div></div>
       )}
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header className="modal_header">
@@ -195,7 +226,7 @@ const MainList = () => {
           <div className="space-y-6">
             <div className="bg_logo flex w-full justify-center items-center "></div>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={updateTaskList}
               className="update_title w-full flex gap-4 border-none outline-none bg-transparent"
             >
               <div className="update_title_input flex flex-col gap-6">
@@ -207,6 +238,8 @@ const MainList = () => {
                     className="text-white mt-4 "
                     placeholder="Plan"
                     type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
                 <div className="update_task_description">
@@ -218,6 +251,8 @@ const MainList = () => {
                     className="text-white mt-4"
                     placeholder="eg- Read a book"
                     type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
               </div>
@@ -225,7 +260,9 @@ const MainList = () => {
           </div>
         </Modal.Body>
         <Modal.Footer className="modal_footer ">
-          <Button className="board_create">Update</Button>
+          <Button onClick={updateTaskList} className="board_create">
+            Update
+          </Button>
           <Button
             className="cancel"
             color="gray"

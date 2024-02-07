@@ -254,3 +254,11 @@ form .task_btn img {
 .task_title:hover .delete_icon, .task_title:active .delete_icon{
     opacity: 1;
 }
+.success{
+    background-color: rgb(129, 236, 129);
+    box-shadow: 0px 2px 1px 0px rgb(117, 236, 117) ;
+}
+.cancel_btn{
+    border: 1px solid white;
+    border-radius: 1rem;
+}
