@@ -3,6 +3,7 @@ import list from "../assets/list.svg";
 import door from "../assets/door.svg";
 import create_btn from "../assets/plus.svg";
 import trash from "../assets/trash.svg";
+import edit from "../assets/edit-pencil.svg";
 import { Button, Tooltip, Toast, Modal } from "flowbite-react";
 import cancel from "../assets/cancel.svg";
 import send from "../assets/send.svg";
@@ -170,28 +171,38 @@ const MainList = () => {
             <Link
               to={`/${items.id}`}
               className="task_title flex gap-4 relative w-full items-center justify-between"
-              onClick={() => {
-                setTitle(items.name);
-                setDescription(items.description);
-                setCurrentTaskId(items.id);
-                setOpenModal(true);
-              }}
             >
               <div className="flex flex-col">
                 <h3>{items.name}</h3>
                 <p>{items.description}</p>
               </div>
-              <div className="delete_icon" onClick={(e) => {
-                e.preventDefault();
-                deleteTaskList(items.id);
-              }}>
-                <img
-                  className="cursor-pointer"
-                  src={trash}
-                  alt="trash"
-                  width={20}
-                  height={20}
-                />
+              <div className="delete_icon">
+                <div className="task_img flex gap-6 items-center">
+                  <img
+                    className="cursor-pointer delete_task_icon"
+                    src={trash}
+                    alt="trash"
+                    width={20}
+                    height={20}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      deleteTaskList(items.id);
+                    }}
+                  />
+                  <img
+                    className="cursor-pointer"
+                    src={edit}
+                    alt="edit"
+                    width={20}
+                    height={20}
+                    onClick={() => {
+                      setTitle(items.name);
+                      setDescription(items.description);
+                      setCurrentTaskId(items.id);
+                      setOpenModal(true);
+                    }}
+                  />
+                </div>
               </div>
             </Link>
           </div>

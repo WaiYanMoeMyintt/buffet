@@ -245,11 +245,16 @@ form .task_btn img {
     width: 100%;
 }
 .delete_icon {
-    background-color: red;
+    /* background-color: red; */
     border-radius: .5rem;
     padding: .3rem;
     opacity: 0;
     transition:  opacity 0.2s ease;
+}
+.delete_task_icon:hover{
+    background-color: red;
+    padding: 1rem;
+    border-radius: .5rem;
 }
 .task_title:hover .delete_icon, .task_title:active .delete_icon{
     opacity: 1;
