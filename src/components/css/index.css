@@ -185,13 +185,17 @@ form {
     border-radius: .5rem;
     outline: 1px solid #bdbcbc;
     padding: .5rem 1rem;
-
+    box-shadow: 1px 2px 4px 1px #292828;
 }
+
 form .task_name input {
     border: none;
     outline: none;
     background-color: transparent;
+    margin: 1rem 0;
     border-radius: .5rem;
+    outline: 1px solid #bdbcbc;
+    width: 100%;
 
 }
 form .task_name input:focus,form .task_name input:active{
@@ -250,11 +254,6 @@ form .task_btn img {
     padding: .3rem;
     opacity: 0;
     transition:  opacity 0.2s ease;
-}
-.delete_task_icon:hover{
-    background-color: red;
-    padding: 1rem;
-    border-radius: .5rem;
 }
 .task_title:hover .delete_icon, .task_title:active .delete_icon{
     opacity: 1;

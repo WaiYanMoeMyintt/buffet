@@ -141,7 +141,7 @@ const MainList = () => {
             className="text-slate-300"
           />
         </div>
-        <hr />
+        {/* <hr /> */}
         <div className="task_btn flex justify-between items-center gap-4 flex-1 py-4 px-0">
           <Tooltip content="cancel">
             <img
